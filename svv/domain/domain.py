@@ -814,6 +814,47 @@ class Domain(object):
                     pts, _ = self.get_interior_points(10 * n)
                     self.random_points = pts
             cells = np.ones((n,), dtype=np.int64) * -1
+        elif method == 'voronoi':
+            centers = self.mesh.cell_centers().points[:, :self.points.shape[1]]
+            candidate_cells = np.arange(self.mesh.n_cells, dtype=np.int64)
+
+            if implicit_range is not None:
+                values = self.__call__(centers).flatten()
+                mask = np.logical_and(values >= implicit_range[0], values <= implicit_range[1])
+                candidate_cells = candidate_cells[mask]
+
+            if tree is not None and isinstance(threshold, float) and candidate_cells.size > 0:
+                tree_points = getattr(getattr(tree, 'active_tree', None), 'data', tree)
+                tree_points = np.asarray(tree_points, dtype=np.float64)
+                if tree_points.ndim == 1:
+                    tree_points = tree_points.reshape(1, -1)
+                tree_points = tree_points[:, :self.points.shape[1]]
+
+                candidate_centers = centers[candidate_cells]
+                distances = np.linalg.norm(
+                    candidate_centers[:, None, :] - tree_points[None, :, :],
+                    axis=2,
+                ).min(axis=1)
+
+                distance_mask = distances > threshold
+                if volume_threshold is not None:
+                    distance_mask = np.logical_and(distance_mask, distances <= volume_threshold)
+                candidate_cells = candidate_cells[distance_mask]
+                distances = distances[distance_mask]
+            else:
+                distances = np.zeros(candidate_cells.shape[0], dtype=np.float64)
+
+            if candidate_cells.size == 0:
+                cells = np.ones((n,), dtype=np.int64) * -1
+                points = np.ones((n, self.points.shape[1]), dtype=np.float64) * np.nan
+            else:
+                order = np.lexsort((candidate_cells, -distances))
+                ordered_cells = candidate_cells[order]
+                if n <= ordered_cells.size:
+                    cells = ordered_cells[:n]
+                else:
+                    cells = np.resize(ordered_cells, n)
+                points = centers[cells]
         else:
             #print("default")
             #print(f"n: {n}, self.points.shape[1]: {self.points.shape[1]}")

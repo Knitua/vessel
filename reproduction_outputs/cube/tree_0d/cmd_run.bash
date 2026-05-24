@@ -1,0 +1,1 @@
+"/root/autodl-tmp/svVascularize/svv/utils/solvers/0D/Linux/x86_64/svzerodsolver" "solver_0d.in"

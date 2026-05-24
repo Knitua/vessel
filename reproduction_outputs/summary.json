@@ -1,0 +1,219 @@
+{
+  "environment": {
+    "python": "3.10.20 (main, Mar 11 2026, 17:46:40) [GCC 14.3.0]",
+    "pyvista": "0.48.4",
+    "mmg": {
+      "mmg2d": "svv/utils/remeshing/Linux/x86_64/mmg2d_O3",
+      "mmg3d": "svv/utils/remeshing/Linux/x86_64/mmg3d_O3",
+      "mmgs": "svv/utils/remeshing/Linux/x86_64/mmgs_O3"
+    },
+    "solver_0d": "svv/utils/solvers/0D/Linux/x86_64/svzerodsolver"
+  },
+  "cube": {
+    "domain": {
+      "points": 24,
+      "patches": 24,
+      "boundary_cells": 12,
+      "mesh_cells": 6,
+      "convexity": 1.0
+    },
+    "tree": {
+      "adds": 3,
+      "segments": 7,
+      "terminals": 4,
+      "root_flow": 0.00025,
+      "root_radius": 0.004973395185792125
+    },
+    "centerlines": {
+      "path": "reproduction_outputs/cube/centerlines/centerlines.vtp",
+      "points": 400,
+      "cells": 399
+    },
+    "zerod": {
+      "case_dir": "reproduction_outputs/cube/tree_0d",
+      "returncode": 0,
+      "solver_input": "reproduction_outputs/cube/tree_0d/solver_0d.in",
+      "geom": "reproduction_outputs/cube/tree_0d/geom.csv",
+      "output_csv": "reproduction_outputs/cube/tree_0d/output.csv",
+      "output_csv_exists": true,
+      "reused": true
+    },
+    "threed": {
+      "xml_files": [
+        "reproduction_outputs/cube/tree_3d/fluid_simulation_0-0.xml"
+      ],
+      "mesh_dir": "reproduction_outputs/cube/tree_3d/mesh",
+      "volume_mesh_cells": 2805147,
+      "surface_mesh_cells": 679368,
+      "reused": true
+    }
+  },
+  "cube_3d": {
+    "tree": {
+      "adds": 1,
+      "segments": 3,
+      "terminals": 2,
+      "root_flow": 0.000125,
+      "root_radius": 0.004260257799466792
+    },
+    "centerlines": {
+      "path": "reproduction_outputs/cube_3d/centerlines/centerlines.vtp",
+      "points": 200,
+      "cells": 199
+    },
+    "zerod": {
+      "case_dir": "reproduction_outputs/cube_3d/tree_0d",
+      "returncode": 0,
+      "solver_input": "reproduction_outputs/cube_3d/tree_0d/solver_0d.in",
+      "geom": "reproduction_outputs/cube_3d/tree_0d/geom.csv",
+      "output_csv": "reproduction_outputs/cube_3d/tree_0d/output.csv",
+      "output_csv_exists": true,
+      "reused": true
+    },
+    "threed": {
+      "xml_files": [
+        "reproduction_outputs/cube_3d/tree_3d/fluid_simulation_0-0.xml"
+      ],
+      "mesh_dir": "reproduction_outputs/cube_3d/tree_3d/mesh",
+      "volume_mesh_cells": 1758519,
+      "surface_mesh_cells": 411664,
+      "reused": true
+    }
+  },
+  "cube_forest": {
+    "networks": 1,
+    "trees_per_network": [
+      2
+    ],
+    "segments_per_tree": [
+      3,
+      3
+    ],
+    "has_connections": true,
+    "connection_count": 1,
+    "zerod": {
+      "case_dir": "reproduction_outputs/cube_forest/forest_0d",
+      "solver_input": "reproduction_outputs/cube_forest/forest_0d/solver_0d.in",
+      "geom": "reproduction_outputs/cube_forest/forest_0d/geom.csv",
+      "output_csv": "reproduction_outputs/cube_forest/forest_0d/output.csv",
+      "solver_input_exists": true,
+      "output_csv_exists": true,
+      "status": "success",
+      "returncode": 0,
+      "stdout_tail": "Running svZeroDSolver: /root/autodl-tmp/svVascularize/svv/utils/solvers/0D/Linux/x86_64/svzerodsolver\n[svzerodsolver] Output will be written to '/root/autodl-tmp/svVascularize/reproduction_outputs/cube_forest/forest_0d/output.csv'.\n",
+      "stderr_tail": ""
+    },
+    "threed_attempt": {
+      "status": "success",
+      "xml_files": [
+        "reproduction_outputs/cube_forest/forest_3d/fluid_simulation_0-0.xml"
+      ],
+      "mesh_dir": "reproduction_outputs/cube_forest/forest_3d/mesh",
+      "volume_mesh_cells": [
+        3016130
+      ],
+      "surface_mesh_cells": [
+        746196
+      ],
+      "reused": true
+    },
+    "stl_candidate": {
+      "path": "reproduction_outputs/stl_export_check/cube_forest/candidate_vasculature.stl",
+      "surface_cells": 746196,
+      "surface_points": 373098,
+      "open_edges": 0,
+      "pyvista_is_watertight": true,
+      "trimesh_is_watertight": true,
+      "connected_components": 1,
+      "min_radius": 0.0033527637561611384,
+      "min_diameter": 0.006705527512322277,
+      "self_intersection_check": "not_available",
+      "has_self_intersections": null
+    }
+  },
+  "biventricle": {
+    "domain": {
+      "points": 19368,
+      "patches": 19364,
+      "boundary_cells": 37014,
+      "mesh_cells": 79787,
+      "convexity": 0.6764824779281314
+    },
+    "tree": {
+      "adds": 1,
+      "segments": 3,
+      "terminals": 2,
+      "root_flow": 0.000125,
+      "root_radius": 0.006171948236357052
+    },
+    "centerlines": {
+      "path": "reproduction_outputs/biventricle/centerlines/centerlines.vtp",
+      "points": 200,
+      "cells": 199
+    },
+    "zerod": {
+      "case_dir": "reproduction_outputs/biventricle/tree_0d",
+      "returncode": 0,
+      "solver_input": "reproduction_outputs/biventricle/tree_0d/solver_0d.in",
+      "geom": "reproduction_outputs/biventricle/tree_0d/geom.csv",
+      "output_csv": "reproduction_outputs/biventricle/tree_0d/output.csv",
+      "output_csv_exists": true,
+      "reused": true
+    },
+    "threed": {
+      "xml_files": [
+        "reproduction_outputs/biventricle/tree_3d/fluid_simulation_0-0.xml"
+      ],
+      "mesh_dir": "reproduction_outputs/biventricle/tree_3d/mesh",
+      "volume_mesh_cells": 5755838,
+      "surface_mesh_cells": 1411274,
+      "reused": true
+    },
+    "stl_candidate": {
+      "path": "reproduction_outputs/stl_export_check/biventricle/candidate_vasculature.stl",
+      "surface_cells": 1411274,
+      "surface_points": 705639,
+      "open_edges": 0,
+      "pyvista_is_watertight": true,
+      "trimesh_is_watertight": true,
+      "connected_components": 1,
+      "min_radius": 0.0044679034197906975,
+      "min_diameter": 0.008935806839581395,
+      "self_intersection_check": "not_available",
+      "has_self_intersections": null
+    }
+  },
+  "stl_export_check": {
+    "stl_candidate": {
+      "path": "reproduction_outputs/stl_export_check/cube/candidate_vasculature.stl",
+      "surface_cells": 679368,
+      "surface_points": 339686,
+      "open_edges": 0,
+      "pyvista_is_watertight": true,
+      "trimesh_is_watertight": true,
+      "connected_components": 1,
+      "min_radius": 0.0027793745353650564,
+      "min_diameter": 0.005558749070730113,
+      "self_intersection_check": "not_available",
+      "has_self_intersections": null
+    }
+  },
+  "timings_sec": {
+    "cube.domain.create": 0.068,
+    "cube.domain.solve": 0.0,
+    "cube.domain.build": 0.37,
+    "cube.tree.n_add_3": 0.021,
+    "cube_3d.tree.n_add_1": 0.011,
+    "cube_forest.roots": 0.013,
+    "cube_forest.add_1": 0.014,
+    "cube_forest.connect": 0.234,
+    "cube_forest.0d.export": 0.004,
+    "cube_forest.0d.run": 0.025,
+    "cube_forest.stl_candidate.export": 23.898,
+    "biventricle.domain.create": 28.63,
+    "biventricle.domain.solve": 0.185,
+    "biventricle.domain.build": 6.374,
+    "biventricle.tree.n_add_1": 1.569,
+    "biventricle.stl_candidate.export": 125.522
+  }
+}

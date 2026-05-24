@@ -1,0 +1,102 @@
+{
+    "description": {
+        "description of case": null,
+        "analytical results": null
+    },
+    "boundary_conditions": [
+        {
+            "bc_name": "INFLOW",
+            "bc_type": "FLOW",
+            "bc_values": {
+                "Q": [
+                    0.000125,
+                    0.000125
+                ],
+                "t": [
+                    0,
+                    1
+                ]
+            }
+        },
+        {
+            "bc_name": "OUT1",
+            "bc_type": "RESISTANCE",
+            "bc_values": {
+                "Pd": 0,
+                "R": 0.0
+            }
+        },
+        {
+            "bc_name": "OUT2",
+            "bc_type": "RESISTANCE",
+            "bc_values": {
+                "Pd": 0,
+                "R": 0.0
+            }
+        }
+    ],
+    "junctions": [
+        {
+            "inlet_vessels": [
+                0
+            ],
+            "junction_name": "J0",
+            "junction_type": "NORMAL_JUNCTION",
+            "outlet_vessels": [
+                1,
+                2
+            ]
+        }
+    ],
+    "simulation_parameters": {
+        "number_of_cardiac_cycles": 1,
+        "number_of_time_pts_per_cardiac_cycle": 5
+    },
+    "vessels": [
+        {
+            "vessel_id": 0,
+            "vessel_length": 0.34434022607670467,
+            "vessel_name": "branch 0_seg0",
+            "zero_d_element_type": "BloodVessel",
+            "zero_d_element_values": {
+                "R_poiseuille": 95826771.04355623,
+                "C": 2.9451041143365837e-12,
+                "L": 6401.356177549322,
+                "stenosis_coefficient": 0.0
+            },
+            "boundary_conditions": {
+                "inlet": "INFLOW"
+            }
+        },
+        {
+            "vessel_id": 1,
+            "vessel_length": 0.8418403900766377,
+            "vessel_name": "branch 1_seg0",
+            "zero_d_element_type": "BloodVessel",
+            "zero_d_element_values": {
+                "R_poiseuille": 613311701.2098093,
+                "C": 4.450065997838529e-12,
+                "L": 25321.54435252625,
+                "stenosis_coefficient": 0.0
+            },
+            "boundary_conditions": {
+                "outlet": "OUT1"
+            }
+        },
+        {
+            "vessel_id": 2,
+            "vessel_length": 0.907666705650397,
+            "vessel_name": "branch 2_seg0",
+            "zero_d_element_type": "BloodVessel",
+            "zero_d_element_values": {
+                "R_poiseuille": 613311701.2098093,
+                "C": 4.982088316418138e-12,
+                "L": 26292.901409871112,
+                "stenosis_coefficient": 0.0
+            },
+            "boundary_conditions": {
+                "outlet": "OUT2"
+            }
+        }
+    ]
+}

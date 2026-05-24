@@ -564,6 +564,7 @@ class Tree(object):
         else:
             if os.path.exists(outdir) and not os.path.isdir(outdir):
                 raise ValueError("Output path exists and is not a directory.")
+        os.makedirs(outdir, exist_ok=True)
         if not watertight:
             model = build_merged_solid(self)
         else:

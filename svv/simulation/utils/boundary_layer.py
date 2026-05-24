@@ -7,6 +7,7 @@ from itertools import permutations
 from scipy.spatial import cKDTree
 from scipy.sparse.csgraph import min_weight_full_bipartite_matching
 from svv.utils.remeshing.remesh import remesh_surface_2d, remesh_volume
+from svv.utils.pyvista_compat import compute_cell_quality
 import tetgen
 
 
@@ -469,7 +470,7 @@ class BoundaryLayer(object):
             outer_submesh_cells_entity.append(self.outer_surface_cell_entity_id)
         volume_submesh = layers.extract_cells(np.argwhere(layers.cell_data['EntityID'] == self.volume_cell_entity_id).flatten())
         volume_submesh = volume_submesh.triangulate(progress_bar=True)
-        volume_submesh_quality = volume_submesh.compute_cell_quality().cell_data['CellQuality'].flatten()
+        volume_submesh_quality = compute_cell_quality(volume_submesh).cell_data['CellQuality'].flatten()
         #if np.any(volume_submesh_quality < 0):
         #    old_tetra_cells = deepcopy(volume_submesh.cells.reshape(-1, 5))
         #    new_tetra_cells = deepcopy(volume_submesh.cells.reshape(-1, 5))
@@ -551,7 +552,7 @@ class BoundaryLayer(object):
             raise ValueError("Merged Outer Surface is not manifold.")
         else:
             print("Merged Outer Surface is manifold.")
-        outer_total_quality = outer_total.compute_cell_quality().cell_data["CellQuality"]
+        outer_total_quality = compute_cell_quality(outer_total).cell_data["CellQuality"]
         if np.any(outer_total_quality < 0.0):
             warnings.warn("Outer Surface has inverted triangles.")
         interior = tetgen.TetGen(outer_total)
@@ -575,7 +576,7 @@ class BoundaryLayer(object):
         else:
             print("Layers Surface is manifold.")
         # Check Quality of Combined Mesh
-        quality = mesh_interior.compute_cell_quality().cell_data['CellQuality'].flatten()
+        quality = compute_cell_quality(mesh_interior).cell_data['CellQuality'].flatten()
         if np.any(quality < 0):
             warnings.warn("Combined Mesh has negative jacobian at {}".format(np.argwhere(quality < 0).flatten()))
             print("Attempting to fix negative jacobians via volume meshing.")
@@ -677,7 +678,7 @@ def append_boundary_layers(mesh, layers, inner_surface_cell_entity_id=1, outer_s
     mesh = interior.grid
     #mesh.points[inner_to_mesh_idx[inner_surface_pt_ids]] = layers.points[inner_to_outer_idx]
     # Check Quality of Combined Mesh
-    quality = mesh.compute_cell_quality().cell_data['CellQuality'].flatten()
+    quality = compute_cell_quality(mesh).cell_data['CellQuality'].flatten()
     if np.any(quality < 0):
         warnings.warn("Combined Mesh has negative jacobian at {}".format(np.argwhere(quality < 0).flatten()))
         print("Attempting to fix negative jacobians via volume meshing.")

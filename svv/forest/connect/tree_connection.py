@@ -598,7 +598,7 @@ class TreeConnection:
                     network_xyzr.append(splprep(xyzr, k=1, s=0))
                     # interp_n.append(splprep(n, k=1, s=0))
                 elif p.shape[1] == 3:
-                    interp_xyz.append(splprep(p, k=2, s=0))
+                    network_xyz.append(splprep(p, k=2, s=0))
                     rr = np.vstack((network_xyz[-1][1], r))
                     network_r.append(splprep(rr, k=1, s=0))
                     xyzr = np.vstack((p, r))
@@ -624,23 +624,21 @@ class TreeConnection:
             network_lines.append(lines)
             tubes = generate_tubes(lines)
             network_tubes.append(tubes)
-            #model = union_tubes(tubes, lines, cap_resolution=cap_resolution)
-            #cell_quality = model.compute_cell_quality(quality_measure='scaled_jacobian')
-            #keep = cell_quality.cell_data["CellQuality"] > 0.1
-            #if not np.all(keep):
-            #    print("Removing poor quality elements from the mesh.")
-            #    keep = np.argwhere(keep).flatten()
-            #    non_manifold_model = model.extract_cells(keep)
-            #    non_manifold_model = non_manifold_model.extract_surface()
-            #    fix = pymeshfix.MeshFix(non_manifold_model)
-            #    fix.repair(verbose=True)
-            #    hsize = model.hsize
-            #    model = fix.mesh.compute_normals(auto_orient_normals=True)
-            #    model.hsize = hsize
-            #model.save('tmp_tree_connection.vtp')
-            #fix = pymeshfix.MeshFix(model)
-            #fix.repair(verbose=True)
-            #model = fix.mesh
+            if len(tubes) == 0:
+                model = None
+            elif len(tubes) == 1:
+                model = tubes[0].compute_normals(auto_orient_normals=True)
+                hsize = (min(lines[0]['radius']) * 2 * np.pi) / cap_resolution
+                model.cell_data['hsize'] = 0
+                model.cell_data['hsize'][0] = hsize
+            else:
+                try:
+                    model = union_tubes(tubes, lines, cap_resolution=cap_resolution)
+                except Exception:
+                    model = pv.merge(tubes).compute_normals(auto_orient_normals=True)
+                    hsize = min((min(line['radius']) * 2 * np.pi) / cap_resolution for line in lines)
+                    model.cell_data['hsize'] = 0
+                    model.cell_data['hsize'][0] = hsize
             if junction_smoothing:
                 try:
                     smooth_model, smooth_wall, smooth_caps = smooth_junctions(model)
@@ -656,5 +654,5 @@ class TreeConnection:
                 else:
                     network_solids.append(model)
             else:
-                network_solids.append(None)
+                network_solids.append(model)
         return network_solids, network_lines, network_tubes

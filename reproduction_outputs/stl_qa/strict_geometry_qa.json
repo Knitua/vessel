@@ -1,0 +1,269 @@
+{
+  "cases": {
+    "cube": {
+      "name": "cube",
+      "path": "reproduction_outputs/stl_export_check/cube/candidate_vasculature.stl",
+      "file_size_bytes": 33968484,
+      "vertices": 339686,
+      "faces": 679368,
+      "trimesh_is_watertight": true,
+      "trimesh_is_winding_consistent": true,
+      "trimesh_euler_number": 2,
+      "pyvista_open_edges": 0,
+      "connected_components": 1,
+      "component_faces": [
+        679368
+      ],
+      "bounds": [
+        [
+          -0.32414698600769043,
+          -0.4726330041885376,
+          -0.3776099979877472
+        ],
+        [
+          0.40617498755455017,
+          0.4850490093231201,
+          0.5012000203132629
+        ]
+      ],
+      "extents": [
+        0.7303219735622406,
+        0.9576820135116577,
+        0.8788100183010101
+      ],
+      "surface_area": 0.06051911515702327,
+      "volume": 0.00010781914148995885,
+      "is_volume": true,
+      "edge_counts": {
+        "unique_edges": 1019052,
+        "boundary_edges": 0,
+        "manifold_edges": 1019052,
+        "nonmanifold_edges": 0,
+        "max_edge_face_count": 2
+      },
+      "duplicate_face_groups": 0,
+      "triangle_quality": {
+        "area": {
+          "min": 1.3985278031447468e-09,
+          "p01": 4.078792452046121e-08,
+          "p05": 5.1934132254474707e-08,
+          "median": 8.76510582051406e-08,
+          "p95": 1.3114132384990963e-07,
+          "max": 3.935054009688822e-07
+        },
+        "edge_length": {
+          "min": 1.378547487813685e-05,
+          "p01": 0.00028428801256590654,
+          "p05": 0.00033172774355752266,
+          "median": 0.0004578999075889774,
+          "p95": 0.0005835394809077513,
+          "max": 0.0014363178368156013
+        },
+        "aspect_ratio": {
+          "min": 1.0001857394622067,
+          "p01": 1.0208273693759835,
+          "p05": 1.0480821083403125,
+          "median": 1.2123600192106077,
+          "p95": 1.5926747916391837,
+          "max": 24.600845369597504
+        },
+        "shape_quality": {
+          "min": 0.031145164271226527,
+          "p01": 0.2623184639220905,
+          "p05": 0.28726230415638904,
+          "median": 0.3265029762069133,
+          "p95": 0.33292915146490687,
+          "max": 0.33333332744844385
+        },
+        "degenerate_faces_area_le_1e-16": 0,
+        "sliver_faces_quality_lt_1e-4": 0,
+        "sliver_faces_quality_lt_1e-3": 0
+      },
+      "self_intersections": {
+        "status": "completed",
+        "method": "pymeshfix.PyTMesh.select_intersecting_triangles",
+        "intersecting_triangle_count": 0,
+        "has_self_intersections": false,
+        "elapsed_sec": 10.421
+      },
+      "elapsed_sec": 18.621
+    },
+    "cube_forest": {
+      "name": "cube_forest",
+      "path": "reproduction_outputs/stl_export_check/cube_forest/candidate_vasculature.stl",
+      "file_size_bytes": 37309884,
+      "vertices": 373098,
+      "faces": 746196,
+      "trimesh_is_watertight": true,
+      "trimesh_is_winding_consistent": true,
+      "trimesh_euler_number": 0,
+      "pyvista_open_edges": 0,
+      "connected_components": 1,
+      "component_faces": [
+        746196
+      ],
+      "bounds": [
+        [
+          -0.21681612730026245,
+          -0.5017407536506653,
+          -0.10971743613481522
+        ],
+        [
+          0.46543699502944946,
+          0.5030909776687622,
+          0.471560001373291
+        ]
+      ],
+      "extents": [
+        0.6822531223297119,
+        1.0048317313194275,
+        0.5812774375081062
+      ],
+      "surface_area": 0.06233804787683256,
+      "volume": 9.667442282241524e-05,
+      "is_volume": true,
+      "edge_counts": {
+        "unique_edges": 1119294,
+        "boundary_edges": 0,
+        "manifold_edges": 1119294,
+        "nonmanifold_edges": 0,
+        "max_edge_face_count": 2
+      },
+      "duplicate_face_groups": 0,
+      "triangle_quality": {
+        "area": {
+          "min": 1.2168954507242514e-09,
+          "p01": 3.735304243127761e-08,
+          "p05": 4.808701627616703e-08,
+          "median": 8.224904300662881e-08,
+          "p95": 1.2454663022151814e-07,
+          "max": 3.611588640582946e-07
+        },
+        "edge_length": {
+          "min": 5.4737991325932666e-05,
+          "p01": 0.00027211586181625944,
+          "p05": 0.0003192857293533588,
+          "median": 0.0004426557714265975,
+          "p95": 0.0005706350457794574,
+          "max": 0.0010609409114561963
+        },
+        "aspect_ratio": {
+          "min": 1.0001940451053761,
+          "p01": 1.020243701422048,
+          "p05": 1.0464985565878049,
+          "median": 1.2098511880265446,
+          "p95": 1.6086599221723419,
+          "max": 6.396718648724995
+        },
+        "shape_quality": {
+          "min": 0.014501929322095552,
+          "p01": 0.2594511148209941,
+          "p05": 0.28613585283411924,
+          "median": 0.32664349859307207,
+          "p95": 0.33295402961734366,
+          "max": 0.3333333264052985
+        },
+        "degenerate_faces_area_le_1e-16": 0,
+        "sliver_faces_quality_lt_1e-4": 0,
+        "sliver_faces_quality_lt_1e-3": 0
+      },
+      "self_intersections": {
+        "status": "completed",
+        "method": "pymeshfix.PyTMesh.select_intersecting_triangles",
+        "intersecting_triangle_count": 0,
+        "has_self_intersections": false,
+        "elapsed_sec": 12.83
+      },
+      "elapsed_sec": 21.465
+    },
+    "biventricle": {
+      "name": "biventricle",
+      "path": "reproduction_outputs/stl_export_check/biventricle/candidate_vasculature.stl",
+      "file_size_bytes": 70563784,
+      "vertices": 705639,
+      "faces": 1411274,
+      "trimesh_is_watertight": true,
+      "trimesh_is_winding_consistent": true,
+      "trimesh_euler_number": 2,
+      "pyvista_open_edges": 0,
+      "connected_components": 1,
+      "component_faces": [
+        1411274
+      ],
+      "bounds": [
+        [
+          1.8061360120773315,
+          2.3468680381774902,
+          0.8099259734153748
+        ],
+        [
+          6.765935897827148,
+          7.660945892333984,
+          3.5136051177978516
+        ]
+      ],
+      "extents": [
+        4.959799885749817,
+        5.314077854156494,
+        2.703679144382477
+      ],
+      "surface_area": 0.3234023529063947,
+      "volume": 0.0008279260783182984,
+      "is_volume": true,
+      "edge_counts": {
+        "unique_edges": 2116911,
+        "boundary_edges": 0,
+        "manifold_edges": 2116911,
+        "nonmanifold_edges": 0,
+        "max_edge_face_count": 2
+      },
+      "duplicate_face_groups": 0,
+      "triangle_quality": {
+        "area": {
+          "min": 1.5282142322202078e-10,
+          "p01": 1.0151087991399527e-07,
+          "p05": 1.298081334976187e-07,
+          "median": 2.241121262407394e-07,
+          "p95": 3.456724175122352e-07,
+          "max": 9.324451314361536e-07
+        },
+        "edge_length": {
+          "min": 2.941837949574725e-06,
+          "p01": 0.00044726651863768633,
+          "p05": 0.0005233439678723524,
+          "median": 0.00073334035925402,
+          "p95": 0.0009509556748252877,
+          "max": 0.001943264937625949
+        },
+        "aspect_ratio": {
+          "min": 1.0001578398727913,
+          "p01": 1.0221974558470643,
+          "p05": 1.0513803533393509,
+          "median": 1.2261818176663826,
+          "p95": 1.6183808726161306,
+          "max": 193.01858048849365
+        },
+        "shape_quality": {
+          "min": 0.0008305848971226303,
+          "p01": 0.2592409436698991,
+          "p05": 0.2849440525919362,
+          "median": 0.32565573684969246,
+          "p95": 0.3328715282249835,
+          "max": 0.3333333279438946
+        },
+        "degenerate_faces_area_le_1e-16": 0,
+        "sliver_faces_quality_lt_1e-4": 0,
+        "sliver_faces_quality_lt_1e-3": 1
+      },
+      "self_intersections": {
+        "status": "completed",
+        "method": "pymeshfix.PyTMesh.select_intersecting_triangles",
+        "intersecting_triangle_count": 0,
+        "has_self_intersections": false,
+        "elapsed_sec": 37.232
+      },
+      "elapsed_sec": 67.4
+    }
+  },
+  "generated_at": "2026-05-24T08:27:50Z"
+}

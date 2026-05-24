@@ -1,0 +1,194 @@
+{
+    "description": {
+        "description of case": null,
+        "analytical results": null
+    },
+    "boundary_conditions": [
+        {
+            "bc_name": "INFLOW",
+            "bc_type": "FLOW",
+            "bc_values": {
+                "Q": [
+                    0.00025,
+                    0.00025
+                ],
+                "t": [
+                    0,
+                    1
+                ]
+            }
+        },
+        {
+            "bc_name": "OUT1",
+            "bc_type": "RESISTANCE",
+            "bc_values": {
+                "Pd": 0,
+                "R": 0.0
+            }
+        },
+        {
+            "bc_name": "OUT3",
+            "bc_type": "RESISTANCE",
+            "bc_values": {
+                "Pd": 0,
+                "R": 0.0
+            }
+        },
+        {
+            "bc_name": "OUT5",
+            "bc_type": "RESISTANCE",
+            "bc_values": {
+                "Pd": 0,
+                "R": 0.0
+            }
+        },
+        {
+            "bc_name": "OUT6",
+            "bc_type": "RESISTANCE",
+            "bc_values": {
+                "Pd": 0,
+                "R": 0.0
+            }
+        }
+    ],
+    "junctions": [
+        {
+            "inlet_vessels": [
+                0
+            ],
+            "junction_name": "J0",
+            "junction_type": "NORMAL_JUNCTION",
+            "outlet_vessels": [
+                1,
+                2
+            ]
+        },
+        {
+            "inlet_vessels": [
+                2
+            ],
+            "junction_name": "J2",
+            "junction_type": "NORMAL_JUNCTION",
+            "outlet_vessels": [
+                3,
+                4
+            ]
+        },
+        {
+            "inlet_vessels": [
+                4
+            ],
+            "junction_name": "J4",
+            "junction_type": "NORMAL_JUNCTION",
+            "outlet_vessels": [
+                5,
+                6
+            ]
+        }
+    ],
+    "simulation_parameters": {
+        "number_of_cardiac_cycles": 1,
+        "number_of_time_pts_per_cardiac_cycle": 5
+    },
+    "vessels": [
+        {
+            "vessel_id": 0,
+            "vessel_length": 0.2073047237702567,
+            "vessel_name": "branch 0_seg0",
+            "zero_d_element_type": "BloodVessel",
+            "zero_d_element_values": {
+                "R_poiseuille": 31062752.393982854,
+                "C": 2.416330130092966e-12,
+                "L": 2827.8687692536573,
+                "stenosis_coefficient": 0.0
+            },
+            "boundary_conditions": {
+                "inlet": "INFLOW"
+            }
+        },
+        {
+            "vessel_id": 1,
+            "vessel_length": 0.8599278915560137,
+            "vessel_name": "branch 1_seg0",
+            "zero_d_element_type": "BloodVessel",
+            "zero_d_element_values": {
+                "R_poiseuille": 680714233.7209896,
+                "C": 4.360869359454677e-12,
+                "L": 26961.752558481207,
+                "stenosis_coefficient": 0.0
+            },
+            "boundary_conditions": {
+                "outlet": "OUT1"
+            }
+        },
+        {
+            "vessel_id": 2,
+            "vessel_length": 0.11973356395158506,
+            "vessel_name": "branch 2_seg0",
+            "zero_d_element_type": "BloodVessel",
+            "zero_d_element_values": {
+                "R_poiseuille": 28164885.140911076,
+                "C": 1.1138643690380555e-12,
+                "L": 2046.4287671574702,
+                "stenosis_coefficient": 0.0
+            }
+        },
+        {
+            "vessel_id": 3,
+            "vessel_length": 0.5520996283993086,
+            "vessel_name": "branch 3_seg0",
+            "zero_d_element_type": "BloodVessel",
+            "zero_d_element_values": {
+                "R_poiseuille": 596219578.2982566,
+                "C": 2.3970964294528093e-12,
+                "L": 20218.38811047305,
+                "stenosis_coefficient": 0.0
+            },
+            "boundary_conditions": {
+                "outlet": "OUT3"
+            }
+        },
+        {
+            "vessel_id": 4,
+            "vessel_length": 0.31237388267253136,
+            "vessel_name": "branch 4_seg0",
+            "zero_d_element_type": "BloodVessel",
+            "zero_d_element_values": {
+                "R_poiseuille": 122603873.26597428,
+                "C": 2.2496886518241965e-12,
+                "L": 6896.426915337654,
+                "stenosis_coefficient": 0.0
+            }
+        },
+        {
+            "vessel_id": 5,
+            "vessel_length": 0.2284901261466398,
+            "vessel_name": "branch 5_seg0",
+            "zero_d_element_type": "BloodVessel",
+            "zero_d_element_values": {
+                "R_poiseuille": 351011831.76630807,
+                "C": 8.317689758226501e-13,
+                "L": 9979.971053241854,
+                "stenosis_coefficient": 0.0
+            },
+            "boundary_conditions": {
+                "outlet": "OUT5"
+            }
+        },
+        {
+            "vessel_id": 6,
+            "vessel_length": 0.4939046652437447,
+            "vessel_name": "branch 6_seg0",
+            "zero_d_element_type": "BloodVessel",
+            "zero_d_element_values": {
+                "R_poiseuille": 351011831.7663082,
+                "C": 2.643420501780299e-12,
+                "L": 14672.939508282518,
+                "stenosis_coefficient": 0.0
+            },
+            "boundary_conditions": {
+                "outlet": "OUT6"
+            }
+        }
+    ]
+}

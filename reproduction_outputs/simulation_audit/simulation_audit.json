@@ -1,0 +1,317 @@
+{
+  "solvers": {
+    "zero_d_candidates": [
+      {
+        "path": "/root/autodl-tmp/svVascularize/svv/bin/svzerodsolver",
+        "exists": false
+      },
+      {
+        "path": "/root/autodl-tmp/svVascularize/svv/utils/solvers/0D/Linux/x86_64/svzerodsolver",
+        "exists": true
+      },
+      {
+        "path": "/root/autodl-tmp/svVascularize/svv/solvers/svzerodsolver",
+        "exists": false
+      }
+    ],
+    "svmultiphysics_path": null
+  },
+  "zero_d": {
+    "cube": {
+      "exists": true,
+      "path": "reproduction_outputs/cube/tree_0d/output.csv",
+      "rows": 35,
+      "vessels": 7,
+      "timepoints": 5,
+      "times": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "flow_in": {
+        "min": 6.249999999380965e-05,
+        "max": 0.00025000000011641535
+      },
+      "flow_out": {
+        "min": 6.249999993729946e-05,
+        "max": 0.00025000000000125866
+      },
+      "pressure_in": {
+        "min": 21938.239484239697,
+        "max": 50310.327708630335
+      },
+      "pressure_out": {
+        "min": -5.082197683525874e-21,
+        "max": 42544.63960828313
+      },
+      "max_abs_flow_balance_error": 1.2366599714749849e-13,
+      "relative_flow_balance_error": 4.94663988359648e-10
+    },
+    "cube_3d": {
+      "exists": true,
+      "path": "reproduction_outputs/cube_3d/tree_0d/output.csv",
+      "rows": 15,
+      "vessels": 3,
+      "timepoints": 5,
+      "times": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "flow_in": {
+        "min": 6.249999999068889e-05,
+        "max": 0.00012500000005820767
+      },
+      "flow_out": {
+        "min": 6.249999997018642e-05,
+        "max": 0.00012500000002914195
+      },
+      "pressure_in": {
+        "min": 38331.98132220062,
+        "max": 50310.32771675486
+      },
+      "pressure_out": {
+        "min": -5.082197683699906e-21,
+        "max": 38331.98133085077
+      },
+      "max_abs_flow_balance_error": 4.487343385328052e-14,
+      "relative_flow_balance_error": 3.589874706590776e-10
+    },
+    "cube_forest": {
+      "exists": true,
+      "path": "reproduction_outputs/cube_forest/forest_0d/output.csv",
+      "rows": 220,
+      "vessels": 44,
+      "timepoints": 5,
+      "times": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "flow_in": {
+        "min": 5.95177242324749e-05,
+        "max": 0.00012500000005820767
+      },
+      "flow_out": {
+        "min": 5.9517724240671666e-05,
+        "max": 0.00012500000002219316
+      },
+      "pressure_in": {
+        "min": 25323.177294977206,
+        "max": 147556.5797209769
+      },
+      "pressure_out": {
+        "min": -1.2705494208814445e-21,
+        "max": 141184.867981219
+      },
+      "max_abs_flow_balance_error": 1.0070492616892635e-13,
+      "relative_flow_balance_error": 8.056394089762556e-10
+    },
+    "biventricle": {
+      "exists": true,
+      "path": "reproduction_outputs/biventricle/tree_0d/output.csv",
+      "rows": 15,
+      "vessels": 3,
+      "timepoints": 5,
+      "times": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "flow_in": {
+        "min": 6.249999981967464e-05,
+        "max": 0.00012500000005820767
+      },
+      "flow_out": {
+        "min": 6.24999941235949e-05,
+        "max": 0.00012500000009985044
+      },
+      "pressure_in": {
+        "min": 48359.03289319553,
+        "max": 50310.32774415909
+      },
+      "pressure_out": {
+        "min": -3.0493186101166765e-20,
+        "max": 48359.032939964825
+      },
+      "max_abs_flow_balance_error": 5.6960797434032e-12,
+      "relative_flow_balance_error": 4.556863792600605e-08
+    }
+  },
+  "three_d": {
+    "cube": {
+      "exists": true,
+      "path": "reproduction_outputs/cube/tree_3d/fluid_simulation_0-0.xml",
+      "number_of_time_steps": "1",
+      "time_step_size": "0.001",
+      "mesh_name": "fluid_msh_0",
+      "mesh_file": "reproduction_outputs/cube/tree_3d/mesh/fluid_msh_0/fluid_msh_0.vtu",
+      "mesh_file_exists": true,
+      "faces": [
+        "cap_0",
+        "cap_1",
+        "cap_2",
+        "cap_3",
+        "cap_4",
+        "lumen_0"
+      ],
+      "boundary_conditions": [
+        {
+          "name": "cap_2",
+          "type": "Dirichlet",
+          "value": "-0.00025"
+        },
+        {
+          "name": "cap_0",
+          "type": "Neumann",
+          "value": "0.0"
+        },
+        {
+          "name": "cap_1",
+          "type": "Neumann",
+          "value": "0.0"
+        },
+        {
+          "name": "cap_3",
+          "type": "Neumann",
+          "value": "0.0"
+        },
+        {
+          "name": "cap_4",
+          "type": "Neumann",
+          "value": "0.0"
+        },
+        {
+          "name": "lumen_0",
+          "type": "Dirichlet",
+          "value": "0.0"
+        }
+      ],
+      "missing_bc_faces": [],
+      "has_result_files": false,
+      "result_files": []
+    },
+    "cube_3d": {
+      "exists": true,
+      "path": "reproduction_outputs/cube_3d/tree_3d/fluid_simulation_0-0.xml",
+      "number_of_time_steps": "1",
+      "time_step_size": "0.001",
+      "mesh_name": "fluid_msh_0",
+      "mesh_file": "reproduction_outputs/cube_3d/tree_3d/mesh/fluid_msh_0/fluid_msh_0.vtu",
+      "mesh_file_exists": true,
+      "faces": [
+        "cap_0",
+        "cap_1",
+        "cap_2",
+        "lumen_0"
+      ],
+      "boundary_conditions": [
+        {
+          "name": "cap_0",
+          "type": "Dirichlet",
+          "value": "-0.000125"
+        },
+        {
+          "name": "cap_1",
+          "type": "Neumann",
+          "value": "0.0"
+        },
+        {
+          "name": "cap_2",
+          "type": "Neumann",
+          "value": "0.0"
+        },
+        {
+          "name": "lumen_0",
+          "type": "Dirichlet",
+          "value": "0.0"
+        }
+      ],
+      "missing_bc_faces": [],
+      "has_result_files": false,
+      "result_files": []
+    },
+    "cube_forest": {
+      "exists": true,
+      "path": "reproduction_outputs/cube_forest/forest_3d/fluid_simulation_0-0.xml",
+      "number_of_time_steps": "1",
+      "time_step_size": "0.001",
+      "mesh_name": "fluid_msh_0_0",
+      "mesh_file": "reproduction_outputs/cube_forest/forest_3d/mesh/fluid_msh_0_0/fluid_msh_0_0.vtu",
+      "mesh_file_exists": true,
+      "faces": [
+        "wall_0",
+        "cap_0",
+        "lumen_0"
+      ],
+      "boundary_conditions": [
+        {
+          "name": "cap_0",
+          "type": "Dirichlet",
+          "value": "-0.000125"
+        },
+        {
+          "name": "wall_0",
+          "type": "Dirichlet",
+          "value": "0.0"
+        },
+        {
+          "name": "lumen_0",
+          "type": "Dirichlet",
+          "value": "0.0"
+        }
+      ],
+      "missing_bc_faces": [],
+      "has_result_files": false,
+      "result_files": []
+    },
+    "biventricle": {
+      "exists": true,
+      "path": "reproduction_outputs/biventricle/tree_3d/fluid_simulation_0-0.xml",
+      "number_of_time_steps": "1",
+      "time_step_size": "0.001",
+      "mesh_name": "fluid_msh_0",
+      "mesh_file": "reproduction_outputs/biventricle/tree_3d/mesh/fluid_msh_0/fluid_msh_0.vtu",
+      "mesh_file_exists": true,
+      "faces": [
+        "cap_0",
+        "cap_1",
+        "cap_2",
+        "lumen_0"
+      ],
+      "boundary_conditions": [
+        {
+          "name": "cap_0",
+          "type": "Dirichlet",
+          "value": "-0.000125"
+        },
+        {
+          "name": "cap_1",
+          "type": "Neumann",
+          "value": "0.0"
+        },
+        {
+          "name": "cap_2",
+          "type": "Neumann",
+          "value": "0.0"
+        },
+        {
+          "name": "lumen_0",
+          "type": "Dirichlet",
+          "value": "0.0"
+        }
+      ],
+      "missing_bc_faces": [],
+      "has_result_files": false,
+      "result_files": []
+    }
+  }
+}

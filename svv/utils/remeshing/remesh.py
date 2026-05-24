@@ -15,6 +15,7 @@ from copy import deepcopy
 from typing import Sequence, Optional
 
 from .mmg import run_mmg
+from svv.utils.pyvista_compat import compute_cell_quality
 
 def remesh_surface_2d(boundary, autofix=False, ar=None, hausd=None, hgrad=None, verbosity=1,
                    hmax=None, hmin=None, hsiz=None, noinsert=None, nomove=None, nosurf=True,
@@ -120,7 +121,7 @@ def remesh_surface_2d(boundary, autofix=False, ar=None, hausd=None, hgrad=None, 
             else:
                 hsiz = None
             triangulated = boundary[i].delaunay_2d()
-            triangulated_quality = triangulated.compute_cell_quality().cell_data["CellQuality"]
+            triangulated_quality = compute_cell_quality(triangulated).cell_data["CellQuality"]
             best = numpy.argmax(triangulated_quality)
             normals = triangulated.compute_normals(cell_normals=True, point_normals=True).cell_data["Normals"]
             normals = normals / numpy.linalg.norm(normals, axis=1).reshape(-1, 1)
@@ -155,7 +156,7 @@ def remesh_surface_2d(boundary, autofix=False, ar=None, hausd=None, hgrad=None, 
         meshio.write("tmp.mesh", mesh)
     elif isinstance(boundary, pv.PolyData):
         if boundary.is_all_triangles:
-            triangulated_quality = boundary.compute_cell_quality().cell_data["CellQuality"]
+            triangulated_quality = compute_cell_quality(boundary).cell_data["CellQuality"]
             best = numpy.argmax(triangulated_quality)
             normals = boundary.compute_normals(cell_normals=True, point_normals=True).cell_data["Normals"]
             normals = normals / numpy.linalg.norm(normals, axis=1).reshape(-1, 1)
@@ -184,7 +185,7 @@ def remesh_surface_2d(boundary, autofix=False, ar=None, hausd=None, hgrad=None, 
             else:
                 hsiz = None
             triangulated = boundary.delaunay_2d()
-            triangulated_quality = triangulated.compute_cell_quality().cell_data["CellQuality"]
+            triangulated_quality = compute_cell_quality(triangulated).cell_data["CellQuality"]
             best = numpy.argmax(triangulated_quality)
             normals = triangulated.compute_normals(cell_normals=True, point_normals=True).cell_data["Normals"]
             normals = normals / numpy.linalg.norm(normals, axis=1).reshape(-1, 1)
@@ -209,7 +210,7 @@ def remesh_surface_2d(boundary, autofix=False, ar=None, hausd=None, hgrad=None, 
             boundary = [boundary]
     elif isinstance(boundary, pv.UnstructuredGrid):
         triangulated = boundary.delaunay_2d()
-        triangulated_quality = triangulated.compute_cell_quality().cell_data["CellQuality"]
+        triangulated_quality = compute_cell_quality(triangulated).cell_data["CellQuality"]
         best = numpy.argmax(triangulated_quality)
         normals = triangulated.compute_normals(cell_normals=True, point_normals=True).cell_data["Normals"]
         normals = normals / numpy.linalg.norm(normals, axis=1).reshape(-1, 1)

@@ -227,8 +227,24 @@ def assign_network(forest, *args, **kwargs):
         try:
             row_ind, col_ind = min_weight_full_bipartite_matching(C_sparse)
         except:
-            print("ERROR: Could not find optimal assignment. Try increasing the number of neighbors allowed in search.")
-            return None, None
+            print("WARNING: Sparse assignment failed; falling back to dense terminal assignment.")
+            if forest.convex:
+                dense_cost = cdist(terminals_0_pts, terminals_1_pts)
+            else:
+                dense_cost = C.copy()
+                missing = ~numpy.isfinite(dense_cost) | (dense_cost >= 1e8)
+                if numpy.any(missing):
+                    euclidean_cost = cdist(terminals_0_pts, terminals_1_pts)
+                    dense_cost[missing] = euclidean_cost[missing]
+            row_ind, col_ind = linear_sum_assignment(dense_cost)
+            for i, j in zip(row_ind, col_ind):
+                key = str(i)+','+str(j)
+                if key not in M_sparse:
+                    path_pts = deepcopy(numpy.vstack((terminals_0_pts[i, :], terminals_1_pts[j, :])))
+                    tck = deepcopy(splprep(path_pts.T, s=0, k=1))
+                    def func(t_, tck=tck):
+                        return numpy.array(splev(t_, tck[0])).T
+                    M_sparse[key] = func
         print("Finished.")
         midpoints = []
         for i, j in zip(row_ind, col_ind):

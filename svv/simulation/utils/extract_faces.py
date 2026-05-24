@@ -4,6 +4,7 @@ from scipy.spatial import cKDTree
 from collections import defaultdict
 import pyvista as pv
 import numpy as np
+from svv.utils.pyvista_compat import compute_cell_quality
 
 def extract_faces(surface, mesh, crease_angle: float = 60, verbose: bool = False, combine_walls: bool = True):
     """
@@ -33,7 +34,7 @@ def extract_faces(surface, mesh, crease_angle: float = 60, verbose: bool = False
     vertex_map = build_vertex_map(face_vertices)
     edge_neighbors = build_edge_map(face_vertices, vertex_map)
     #face_neighbors = build_face_neighbors(surface)
-    element_quality = surface.compute_cell_quality(quality_measure='scaled_jacobian')
+    element_quality = compute_cell_quality(surface, quality_measure='scaled_jacobian')
     # Use PyVista's auto-orientation with connectivity-based propagation
     # This correctly handles both outer surfaces and interior holes
     element_normals = surface.compute_normals(

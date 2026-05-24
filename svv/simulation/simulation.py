@@ -351,64 +351,81 @@ class Simulation(object):
                             self.fluid_domain_surface_meshes.append(fluid_surface)
                             self.fluid_domain_volume_meshes.append(None)
                         else:
-                            hsize = fluid_surface.hsize
-                            if (boundary_layer or wall_layers) and fluid:
-                                fluid_surface = fluid_volume.extract_surface()
-                                # faces, wall_surfaces, cap_surfaces, lumen_surfaces, _
+                            hsize = getattr(fluid_surface, "hsize", None)
+                            if hsize is None and "hsize" in fluid_surface.cell_data:
+                                hsize = fluid_surface.cell_data["hsize"][0]
+                            if hsize is None:
+                                hsize = fluid_surface.length / 100.0
+                            fluid_surface = fluid_volume.extract_surface()
+                            fluid_surface_faces = None
                             if boundary_layer and fluid:
                                 fluid_surface_faces = extract_faces(fluid_surface, fluid_volume)
-                                # Use lumen (vessel wall) surfaces for boundary-layer generation
                                 lumens = fluid_surface_faces[3]
                                 if len(lumens) > 1:
                                     print("Boundary layer generation with more than one wall mesh is ambiguous.")
                                     print("Only the first wall mesh will be used.")
                                 elif len(lumens) == 0:
                                     print("No wall mesh found for boundary layer generation.")
-                                wall = lumens[0]
-                                for j in range(boundary_layer_attempts):
-                                    try:
-                                        fluid_boundary_layers = BoundaryLayer(wall,
-                                                                              layer_thickness=layer_thickness_ratio * hsize,
-                                                                              remesh_vol=remesh_vol)
-                                        fluid_volume, fluid_interior, fluid_boundary = fluid_boundary_layers.generate()
-                                        fluid_surface = fluid_volume.extract_surface()
-                                        success = True
-                                        print("Generated boundary layers on attempt {}/{}.".format(i + 1,
-                                                                                                   boundary_layer_attempts))
-                                    except:
-                                        print("Failed to generate boundary layers {}/{}.\n".format(i + 1,
-                                                                                                   boundary_layer_attempts))
-                                        fluid_boundary = None
-                                        fluid_interior = None
-                                        success = False
-                                        layer_thickness_ratio *= layer_thickness_ratio_adjustment
-                                    if success:
-                                        break
-                                self.fluid_domain_boundary_layers.append(fluid_boundary)
-                                self.fluid_domain_interiors.append(fluid_interior)
+                                wall = lumens[0] if len(lumens) > 0 else None
+                                if wall is None:
+                                    self.fluid_domain_boundary_layers.append(None)
+                                    self.fluid_domain_interiors.append(None)
+                                else:
+                                    for j in range(boundary_layer_attempts):
+                                        try:
+                                            fluid_boundary_layers = BoundaryLayer(wall,
+                                                                                  layer_thickness=layer_thickness_ratio * hsize,
+                                                                                  remesh_vol=remesh_vol)
+                                            fluid_volume, fluid_interior, fluid_boundary = fluid_boundary_layers.generate()
+                                            fluid_surface = fluid_volume.extract_surface()
+                                            success = True
+                                            print("Generated boundary layers on attempt {}/{}.".format(i + 1,
+                                                                                                       boundary_layer_attempts))
+                                        except:
+                                            print("Failed to generate boundary layers {}/{}.\n".format(i + 1,
+                                                                                                       boundary_layer_attempts))
+                                            fluid_boundary = None
+                                            fluid_interior = None
+                                            success = False
+                                            layer_thickness_ratio *= layer_thickness_ratio_adjustment
+                                        if success:
+                                            break
+                                    self.fluid_domain_boundary_layers.append(fluid_boundary)
+                                    self.fluid_domain_interiors.append(fluid_interior)
                             else:
                                 if remesh_vol:
                                     fluid_volume = remesh_volume(fluid_volume, hsiz=hsize)
+                                    fluid_surface = fluid_volume.extract_surface()
+                                    fluid_surface_faces = None
                                 self.fluid_domain_boundary_layers.append(None)
                                 self.fluid_domain_interiors.append(None)
                             if wall_layers and fluid:
+                                if fluid_surface_faces is None:
+                                    fluid_surface_faces = extract_faces(fluid_surface, fluid_volume)
                                 if isinstance(wall_thickness, type(None)):
                                     wall_thickness = 2 * layer_thickness_ratio * hsize
-                                wall = fluid_surface_faces[1][0]
-                                fluid_boundary_layers = BoundaryLayer(wall, negate_warp_vectors=False,
-                                                                      layer_thickness=wall_thickness,
-                                                                      remesh_vol=False, combine=False)
-                                _, _, fluid_wall = fluid_boundary_layers.generate()
-                                # Perform tetrahedron re-orientation to ensure positive Jacobian
-                                fluid_wall = remesh_volume(fluid_wall, nomove=True, noinsert=True, nosurf=True, verbosity=4)
-                                if remesh_vol:
-                                    fluid_wall = remesh_volume(fluid_wall, hausd=hausd, nosurf=True, verbosity=4)
-                                self.fluid_domain_wall_layers.append(fluid_wall)
+                                lumens = fluid_surface_faces[3]
+                                walls = fluid_surface_faces[1]
+                                wall = lumens[0] if len(lumens) > 0 else (walls[0] if len(walls) > 0 else None)
+                                if wall is None:
+                                    print("No suitable wall surface found for wall layer generation.")
+                                    self.fluid_domain_wall_layers.append(None)
+                                else:
+                                    fluid_boundary_layers = BoundaryLayer(wall, negate_warp_vectors=False,
+                                                                          layer_thickness=wall_thickness,
+                                                                          remesh_vol=False, combine=False)
+                                    _, _, fluid_wall = fluid_boundary_layers.generate()
+                                    # Perform tetrahedron re-orientation to ensure positive Jacobian
+                                    fluid_wall = remesh_volume(fluid_wall, nomove=True, noinsert=True, nosurf=True, verbosity=4)
+                                    if remesh_vol:
+                                        fluid_wall = remesh_volume(fluid_wall, hausd=hausd, nosurf=True, verbosity=4)
+                                    self.fluid_domain_wall_layers.append(fluid_wall)
                             else:
                                 self.fluid_domain_wall_layers.append(None)
-                            fluid_surface.hsize = hsize
-                        self.fluid_domain_surface_meshes.append(fluid_surface)
-                        self.fluid_domain_volume_meshes.append(fluid_volume)
+                            fluid_surface.cell_data["hsize"] = hsize
+                            fluid_surface.cell_data["hsize"][0] = hsize
+                            self.fluid_domain_surface_meshes.append(fluid_surface)
+                            self.fluid_domain_volume_meshes.append(fluid_volume)
                     else:
                         self.fluid_domain_surface_meshes.append(fluid_surface)
                         self.fluid_domain_volume_meshes.append(None)
@@ -638,10 +655,16 @@ class Simulation(object):
                 continue
             if 'cap' in face:
                 fluid_equation.add_outlet(face, value=0.0)
-            if 'wall' in face:
+            if 'wall' in face or 'lumen' in face:
                 fluid_equation.add_wall(face)
         # Sanity check that all faces received a BC
         fluid_equation.check_bcs()
+        missing_bcs = [
+            face for face in fluid_mesh.faces
+            if not any(bc.name == face for bc in fluid_equation.boundary_conditions)
+        ]
+        if missing_bcs:
+            raise ValueError("Boundary condition not set for faces: {}".format(", ".join(missing_bcs)))
 
         # Configure linear solver and linear algebra backend so the
         # <LS> section includes the required <Linear_algebra> block

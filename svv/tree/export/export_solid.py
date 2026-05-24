@@ -9,6 +9,7 @@ from scipy.interpolate import splprep, splev
 from scipy.spatial import cKDTree
 from svv.utils.remeshing.remesh import remesh_surface, write_medit_sol
 from svv.domain.routines.boolean import boolean
+from svv.utils.pyvista_compat import compute_cell_quality
 
 
 def find_unionable_pairs(lines, tubes, method='centerline', bbox_pad_factor=0.1, eps_factor=0.05):
@@ -734,8 +735,9 @@ def build_watertight_solid(tree, cap_resolution=40):
     #tubes = generate_tubes_parallel(lines, radius_based=True)
     #model = union_tubes_balanced(tubes, lines, cap_resolution=cap_resolution)
     # Remove poor quality elements and repair the mesh.
-    cell_quality = model.compute_cell_quality(quality_measure='scaled_jacobian')
+    cell_quality = compute_cell_quality(model, quality_measure='scaled_jacobian')
     keep = cell_quality.cell_data["CellQuality"] > 0.1
+    hsize = model.cell_data["hsize"][0]
     if not numpy.all(keep):
         print("Removing poor quality elements from the mesh.")
         #keep = numpy.argwhere(keep).flatten()
@@ -743,7 +745,6 @@ def build_watertight_solid(tree, cap_resolution=40):
         #non_manifold_model = non_manifold_model.extract_surface()
         fix = pymeshfix.MeshFix(model) # non_manifold_model)
         fix.repair(verbose=True)
-        hsize = model.cell_data["hsize"][0] #hsize
         model = fix.mesh.compute_normals(auto_orient_normals=True)
         #model.hsize = hsize
         model.cell_data['hsize'] = 0
