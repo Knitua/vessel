@@ -9,7 +9,7 @@
 [![Docs](https://img.shields.io/badge/docs-gh--pages-brightgreen)](https://simvascular.github.io/svVascularize/)
 [![Telemetry](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zasexton/svVascularize/main/docs/badges/telemetry.json)](https://sentry.io)
 <!-- smoke-test-badge -->
-[![SVV passing](https://img.shields.io/static/v1?label=svv%20passing&message=linux%20ok%20%7C%20macos%20ok%20%7C%20windows%20ok&color=brightgreen)](https://github.com/SimVascular/svVascularize/actions/workflows/basic-smoke-test.yml?query=branch%3Amain)
+[![SVV passing](https://img.shields.io/static/v1?label=svv%20passing&message=linux%20ok%20%7C%20macos%20ok%20%7C%20windows%20ok&color=brightgreen)](https://github.com/Knitua/vessel/actions/workflows/basic-smoke-test.yml?query=branch%3Amain)
 <!-- /smoke-test-badge -->
 
 <p align="left">
